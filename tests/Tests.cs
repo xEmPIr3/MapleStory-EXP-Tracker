@@ -246,13 +246,16 @@ namespace MapleExpTracker.Tests
             Check(o == FeedOutcome.Started && d.Exp == 613128, "start from run-together text", o + " exp " + d.Exp);
 
             // A game whose numbers don't follow the table still works from the percentage alone.
+            // (It waits about 20 readings before giving up on the table, so a misread can't start it.)
             const long Fake = 777777, FakeNext = 850000;
             var n = new ExpTracker { Level = 30 };
-            n.Feed(At(600000, Fake), T0);
-            n.Feed(At(600000, Fake), T0.AddSeconds(1));
-            for (int i = 1; i <= 25; i++) n.Feed(At(600000 + i * 7000, Fake), T0.AddSeconds(1 + i));
-            n.Feed(At(9000, FakeNext), T0.AddSeconds(30));
-            o = n.Feed(At(9000, FakeNext), T0.AddSeconds(31));
+            for (int i = 0; i < 19; i++) n.Feed(At(600000, Fake), T0.AddSeconds(i));
+            Check(!n.Started, "a reading that fits no level doesn't start tracking right away", null);
+            for (int i = 19; i < 22; i++) n.Feed(At(600000, Fake), T0.AddSeconds(i));
+            Check(n.Started && !n.UsesTable, "starts once the table is switched off", null);
+            for (int i = 1; i <= 25; i++) n.Feed(At(600000 + i * 7000, Fake), T0.AddSeconds(22 + i));
+            n.Feed(At(9000, FakeNext), T0.AddSeconds(50));
+            o = n.Feed(At(9000, FakeNext), T0.AddSeconds(51));
             Check(!n.UsesTable && o == FeedOutcome.LevelUp && n.Level == 31, "no-table fallback: gains and level up", o + ", table " + n.UsesTable + ", level " + n.Level);
         }
 
@@ -366,23 +369,84 @@ namespace MapleExpTracker.Tests
         static void PixelFontTests()
         {
             Console.WriteLine("== MapleStory font (real captures)");
+            string error;
+            OcrService.TryInit(out error);
             using (var exp = new Bitmap(Fixture("exp_194111_59.87.png")))
             {
                 foreach (double scale in new[] { 1.0, 0.5, 1.5, 2.0 })
                 {
                     using (Bitmap img = Rescale(exp, scale))
                     {
+                        // "." and "," look alike at small sizes; the parser accepts either.
                         string text = PixelFontReader.Read(img);
-                        Check(text != null && text.Contains("194,111[59.87%]"), "font reader at game scale x" + (2 * scale), text ?? "null");
+                        List<ExpReading> r = text == null ? new List<ExpReading>() : ExpParser.Parse(text);
+                        bool ok = r.Count > 0 && r[0].Exp == 194111 && Math.Abs(r[0].PercentValue - 59.87) < 0.01;
+                        Check(ok, "font reader at game scale x" + (2 * scale), text ?? "null");
                         if (scale == 1.0) CheckRead("EXP capture through Read()", img, 194111, 59.87);
                     }
                 }
             }
+            // Other players' game scales: crisp (pixel-perfect) and smoothed stretching. Each must read
+            // correctly where listed, and at no scale may the tracker end up with wrong numbers: neither a
+            // fresh one starting up, nor one already tracking.
+            Console.WriteLine("== Game scales (real capture resized)");
+            long l41 = ExpTable.Required(41);
+            using (var src = new Bitmap(Fixture("exp_194111_59.87.png")))
+            {
+                double[] crispOk = { 1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4 };
+                double[] smoothOk = { 1.25, 1.75, 2, 2.5, 3, 4 };
+                double[] all = { 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4 };
+                foreach (bool smooth in new[] { false, true })
+                {
+                    var failed = new List<string>();
+                    var wrong = new List<string>();
+                    foreach (double gs in all)
+                    {
+                        using (Bitmap img = Resize(src, gs / 2, smooth))
+                        {
+                            int preferred = 0;
+                            OcrRead read = OcrService.Read(img, ref preferred, false);
+                            bool right = read.Candidates.Count > 0 && read.Candidates[0].Exp == 194111 && Math.Abs(read.Candidates[0].PercentValue - 59.87) < 0.01;
+                            if (!right && Array.IndexOf(smooth ? smoothOk : crispOk, gs) >= 0) failed.Add(gs + "x");
+
+                            var fresh = new ExpTracker();
+                            var tracking = new ExpTracker();
+                            tracking.Feed(At(194111, l41), T0);
+                            tracking.Feed(At(194111, l41), T0.AddSeconds(1));
+                            for (int k = 0; k < 3; k++)
+                            {
+                                fresh.Feed(read.Candidates, T0.AddSeconds(2 + k));
+                                tracking.Feed(read.Candidates, T0.AddSeconds(2 + k));
+                            }
+                            if (fresh.Started && (fresh.Exp != 194111 || fresh.Level != 41)) wrong.Add(gs + "x fresh start: " + fresh.Exp + " lv " + fresh.Level);
+                            if (tracking.Exp != 194111 || tracking.Level != 41 || tracking.SessionGain != 0) wrong.Add(gs + "x tracking: " + tracking.Exp + " lv " + tracking.Level);
+                        }
+                    }
+                    string kind = smooth ? "smoothed" : "crisp";
+                    Check(failed.Count == 0, kind + " scales " + string.Join(", ", Array.ConvertAll(smooth ? smoothOk : crispOk, d => d + "x")) + " read correctly",
+                        failed.Count == 0 ? null : "failed at " + string.Join(", ", failed.ToArray()));
+                    Check(wrong.Count == 0, kind + ": tracker never takes wrong numbers at any scale", wrong.Count == 0 ? null : string.Join("; ", wrong.ToArray()));
+                }
+            }
+
             using (var hpmp = new Bitmap(Fixture("hp_566_1381_mp_472_1140.png")))
             {
                 string text = PixelFontReader.Read(hpmp);
                 Check(text != null && text.Contains("[566/1381]") && text.Contains("[472/1140]"), "font reader on HP/MP (all digits)", text ?? "null");
             }
+        }
+
+        static Bitmap Resize(Bitmap src, double factor, bool smooth)
+        {
+            int w = (int)Math.Round(src.Width * factor), h = (int)Math.Round(src.Height * factor);
+            var bmp = new Bitmap(w, h, PixelFormat.Format32bppArgb);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.InterpolationMode = smooth ? InterpolationMode.HighQualityBilinear : InterpolationMode.NearestNeighbor;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                g.DrawImage(src, new Rectangle(0, 0, w, h), 0, 0, src.Width, src.Height, GraphicsUnit.Pixel);
+            }
+            return bmp;
         }
 
         static Bitmap Rescale(Bitmap src, double scale)

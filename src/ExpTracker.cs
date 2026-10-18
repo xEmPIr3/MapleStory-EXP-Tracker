@@ -248,6 +248,17 @@ namespace MapleExpTracker
                     LastNote = "Partial reading (no percentage), ignored.";
                     return FeedOutcome.Rejected;
                 }
+                // A reading that fits no level is almost surely a misread. Only start from such readings
+                // once clear ones have kept coming long enough to switch the table off (a game patch).
+                if (table != TableState.Off && TableLevel(c) == 0)
+                {
+                    NoteTable(c);
+                    if (table != TableState.Off)
+                    {
+                        LastNote = "Reading doesn't match any level in the EXP table, waiting.";
+                        return FeedOutcome.Rejected;
+                    }
+                }
             }
             if (!Continue(c, FeedOutcome.Starting, now)) Begin(c, FeedOutcome.Starting, now);
 

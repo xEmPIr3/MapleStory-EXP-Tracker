@@ -93,6 +93,8 @@ namespace MapleExpTracker
             if (fontFound)
             {
                 List<ExpReading> found = fontText != null ? ExpParser.Parse(fontText) : new List<ExpReading>();
+                // The game always shows "number [dd.dd%]"; anything else read from its font is a misread.
+                found = found.FindAll(r => r.HasPercent && r.PercentStep <= 0.011 && r.Quality >= ExpReading.High);
                 bool clean = found.Count > 0 && found[0].Quality >= ExpReading.High;
                 read.Text = fontText ?? "(EXP numbers partly covered, skipped)";
                 read.Filter = "MapleStory font";
@@ -155,6 +157,17 @@ namespace MapleExpTracker
                     }
                     bestVotes = Math.Max(bestVotes, votes[index]);
                 }
+            }
+
+            // MapleStory always shows the percentage with two decimals: a bare number or "87%" is a
+            // partial or broken read.
+            for (int i = read.Candidates.Count - 1; i >= 0; i--)
+            {
+                ExpReading r = read.Candidates[i];
+                if ((r.HasPercent && r.PercentStep <= 0.011) || r.Total > 0) continue;
+                read.Candidates.RemoveAt(i);
+                votes.RemoveAt(i);
+                firstAttempt.RemoveAt(i);
             }
 
             // Most votes first; ties keep discovery order.
