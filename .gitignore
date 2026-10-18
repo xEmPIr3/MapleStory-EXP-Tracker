@@ -1,0 +1,14 @@
+# Build output
+*.exe
+!tools/*.cs
+
+# Personal data written by the tracker at runtime
+settings.ini
+tracker.log
+tracker.old.log
+error.log
+
+# Generated images and the public download-page repository
+screenshot.png
+docs/
+public/
