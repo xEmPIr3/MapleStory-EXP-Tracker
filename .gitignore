@@ -8,7 +8,6 @@ tracker.log
 tracker.old.log
 error.log
 
-# Generated images and the public download-page repository
+# Generated images
 screenshot.png
 docs/
-public/

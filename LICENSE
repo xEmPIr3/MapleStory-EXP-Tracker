@@ -1,19 +1,31 @@
 MapleStory Classic EXP Tracker
 Copyright (c) 2026 Aydrian. All rights reserved.
 
-You may download and use this software free of charge for your own personal use.
+This is NOT open source software. The source code is published so that anyone can see exactly what the
+software does. Being able to see it does not give you any right to use it beyond what is written below.
 
-Without written permission from the author you may not:
-  - redistribute, re-upload, sell, rent or share the software, in whole or in part;
-  - modify the software or create works based on it;
-  - decompile, disassemble or reverse engineer the software, except where the law expressly allows it;
-  - remove or change the "Created by Aydrian" credit.
+You MAY:
+  - download the official releases from https://github.com/xEmPIr3/MapleStory-EXP-Tracker and use them
+    free of charge for your own personal use;
+  - read the source code, and build it without changes to run on your own computer for your own personal use.
 
-The only official download location is:
-https://github.com/xEmPIr3/MapleStory-EXP-Tracker
+You MAY NOT, without written permission from the author:
+  - copy, reuse or adapt any part of the source code, images, artwork or design in any other project or
+    product, in any form;
+  - modify the software or the source code and share, publish or distribute the result;
+  - redistribute, re-upload, publish, sell, rent or sublicense the software or the source code, in whole or
+    in part;
+  - remove or change the "Created by Aydrian" credit, or present the software or any part of it as your own
+    work.
+
+Forking or viewing this repository through GitHub's features, as GitHub's Terms of Service allow, does not
+give you any of the rights listed under "You MAY NOT".
+
+The only official download location is https://github.com/xEmPIr3/MapleStory-EXP-Tracker.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL THE
 AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE. You use the
 software at your own risk and are responsible for following the terms of service of any game you use it with.
 
+The EXP table values in src/ExpTable.cs come from meowdb.com and are not claimed by this copyright.
 MapleStory is a trademark of NEXON Korea Corporation. This software is not affiliated with or endorsed by Nexon.

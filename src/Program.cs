@@ -1,3 +1,4 @@
+// MapleStory Classic EXP Tracker. Copyright (c) 2026 Aydrian. All rights reserved. See LICENSE.
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;

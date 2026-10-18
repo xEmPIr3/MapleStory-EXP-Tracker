@@ -1,4 +1,5 @@
 @echo off
+rem MapleStory Classic EXP Tracker. Copyright (c) 2026 Aydrian. All rights reserved. See LICENSE.
 rem Builds MapleExpTracker.exe with the C# compiler that ships with Windows (.NET Framework 4.x).
 rem   build.bat              build the tracker
 rem   build.bat test         build the tracker, then build and run the tests
