@@ -35,19 +35,22 @@ Windows 10 / 11 · one small .exe · no install
 - Detects your level automatically (levels 1–99)
 - Counts level ups and death penalties correctly
 - Ignores your mouse cursor or a window passing over the numbers
-- 6 themes, adjustable size and opacity, and a click-through mode for playing
+- 12 color themes (including Rainbow), adjustable size and opacity, and a click-through mode for playing
 - Stays on top of the game and remembers its position and settings
 - No install, no account, no internet connection needed
 
 ## Themes
 
-Pick one from the settings menu. Your choice is remembered.
+12 themes to pick from in the settings menu (gear → Theme). Your choice is remembered.
 
 | | |
 |:---:|:---:|
-| <img src="images/theme-default.png" width="400" alt="Default (Gold) theme"><br>**Default (Gold)** | <img src="images/theme-pink.png" width="400" alt="Pink theme"><br>**Pink** |
-| <img src="images/theme-red.png" width="400" alt="Red theme"><br>**Red** | <img src="images/theme-black.png" width="400" alt="Black theme"><br>**Black** |
-| <img src="images/theme-orange.png" width="400" alt="Orange theme"><br>**Orange** | <img src="images/theme-blue.png" width="400" alt="Blue theme"><br>**Blue** |
+| <img src="images/theme-default.png" width="400" alt="Default (Gold) theme"><br>**Default (Gold)** | <img src="images/theme-rainbow.png" width="400" alt="Rainbow theme"><br>**Rainbow** |
+| <img src="images/theme-pink.png" width="400" alt="Pink theme"><br>**Pink** | <img src="images/theme-red.png" width="400" alt="Red theme"><br>**Red** |
+| <img src="images/theme-orange.png" width="400" alt="Orange theme"><br>**Orange** | <img src="images/theme-yellow.png" width="400" alt="Yellow theme"><br>**Yellow** |
+| <img src="images/theme-green.png" width="400" alt="Green theme"><br>**Green** | <img src="images/theme-teal.png" width="400" alt="Teal theme"><br>**Teal** |
+| <img src="images/theme-blue.png" width="400" alt="Blue theme"><br>**Blue** | <img src="images/theme-purple.png" width="400" alt="Purple theme"><br>**Purple** |
+| <img src="images/theme-lavender.png" width="400" alt="Lavender theme"><br>**Lavender** | <img src="images/theme-black.png" width="400" alt="Black theme"><br>**Black** |
 
 ## How it works
 
