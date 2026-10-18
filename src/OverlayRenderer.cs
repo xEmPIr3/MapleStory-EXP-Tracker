@@ -269,10 +269,10 @@ namespace MapleExpTracker
     public sealed class OverlayRenderer
     {
         public const int BaseWidth = 384;
-        public const int BaseHeight = 178;
+        public const int BaseHeight = 160;
         const float Margin = 6f;         // room for the drop shadow
         const float PanelW = 372f;
-        const float PanelH = 166f;
+        const float PanelH = 148f;
         const float HeaderH = 26f;
         const float RowTop = 35f;
         const float RowH = 21f;
@@ -290,8 +290,6 @@ namespace MapleExpTracker
         static readonly Font LvFont = new Font(Sans, 10.5f, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Pixel);
         static readonly Font LabelFont = new Font(Sans, 9f, FontStyle.Bold, GraphicsUnit.Pixel);
         static readonly Font ValueFont = new Font(Sans, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
-        static readonly Font CreditFont = new Font(Sans, 9f, FontStyle.Regular, GraphicsUnit.Pixel);
-        static readonly Font CreditNameFont = new Font(Sans, 9f, FontStyle.Bold, GraphicsUnit.Pixel);
 
         Palette pal = Palette.Default;
 
@@ -325,7 +323,6 @@ namespace MapleExpTracker
                 float barLeft = DrawLevel(g, v);
                 DrawBar(g, v, barLeft);
                 DrawStats(g, v);
-                DrawCredit(g);
             }
             return bmp;
         }
@@ -616,18 +613,6 @@ namespace MapleExpTracker
                     using (var b = new SolidBrush(c)) g.DrawString(values[i], ValueFont, b, x + 9f, top, Typo);
                 }
             }
-        }
-
-        void DrawCredit(Graphics g)
-        {
-            const float y = PanelH - 10.5f;
-            using (var pen = new Pen(pal.Divider, 1f)) g.DrawLine(pen, 8f, PanelH - 20.5f, PanelW - 8f, PanelH - 20.5f);
-            const string by = "Created by ", name = "Aydrian";
-            float w1 = Measure(g, by, CreditFont), w2 = Measure(g, name, CreditNameFont);
-            float x = (PanelW - w1 - w2) / 2;
-            using (var b = new SolidBrush(pal.Missing)) g.DrawString(by, CreditFont, b, x, TextTop(CreditFont, y), Typo);
-            using (Brush b = AccentBrush(new RectangleF(x + w1, y - 8f, w2, 16f), pal.Title))
-                g.DrawString(name, CreditNameFont, b, x + w1, TextTop(CreditNameFont, y), Typo);
         }
 
         static Color Lighten(Color c, float amount)
