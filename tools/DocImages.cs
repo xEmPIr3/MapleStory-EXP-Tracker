@@ -181,7 +181,7 @@ namespace MapleExpTracker.Tools
                 tray.Visible = false;
 
                 Rectangle wa = Screen.PrimaryScreen.WorkingArea;
-                var area = new Rectangle(wa.Left + 80, wa.Top + 80, 640, 470);
+                var area = new Rectangle(wa.Left + 80, wa.Top + 80, 700, 620);
                 backdrop.FormBorderStyle = FormBorderStyle.None;
                 backdrop.StartPosition = FormStartPosition.Manual;
                 backdrop.ShowInTaskbar = false;

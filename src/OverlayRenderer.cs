@@ -53,6 +53,12 @@ namespace MapleExpTracker
         public Color TileTop, TileMid, TileBottom, TileBorder, TileDigitOutline;   // level digit tiles
         public Color FillTop, FillMid, FillBottom, FillEdge;                      // EXP bar fill
         public Color CoinTop, CoinBottom, CoinRim;                                // header icon
+        public bool Rainbow;                                                      // rainbow border, title, tiles and bar
+
+        public static readonly Color[] RainbowColors =
+        {
+            Rgb(0xFF4D4D), Rgb(0xFF9F43), Rgb(0xFFE14D), Rgb(0x4CD964), Rgb(0x4DA6FF), Rgb(0xA66BFF)
+        };
 
         static Color Rgb(int rgb)
         {
@@ -155,7 +161,101 @@ namespace MapleExpTracker
             CoinTop = Rgb(0xBFE4FF), CoinBottom = Rgb(0x3A8EE0), CoinRim = Rgb(0x0C2E5E)
         };
 
-        public static readonly Palette[] All = { Default, Pink, Red, Black, Orange, Blue };
+        public static readonly Palette Purple = new Palette
+        {
+            Name = "purple", DisplayName = "Purple",
+            Border = Rgb(0xA86BE0), PanelTop = Rgb(0x221A2C), PanelBottom = Rgb(0x110C17),
+            HeaderTop = Rgb(0x4E2A7A), HeaderBottom = Rgb(0x28153F), HeaderSheen = Rgba(60, 0xD9B8FF),
+            HeaderLine = Rgb(0x07040C), Title = Rgb(0xD2B0FF), NameText = Rgb(0xF1E8FF),
+            BadgeTop = Rgb(0x0E0A14), BadgeBottom = Rgb(0x0E0A14), BadgeBorder = Rgb(0x5B3A82), BadgeText = Rgb(0xEDE3FA),
+            TrackTop = Rgb(0x08060C), TrackBottom = Rgb(0x08060C), TrackBorder = Rgb(0x5B3A82),
+            Label = Rgb(0xAE98C8), Value = Rgb(0xFFFFFF), ValueShadow = Rgba(150, 0x000000), Negative = Rgb(0xFF8672),
+            Missing = Rgb(0x7C6E8E), Divider = Rgb(0x352847),
+            TileTop = Rgb(0xE0C2FF), TileMid = Rgb(0xA35CF0), TileBottom = Rgb(0x6E2CC0), TileBorder = Rgb(0x351066), TileDigitOutline = Rgb(0x351066),
+            FillTop = Rgb(0xE6CCFF), FillMid = Rgb(0xB072F5), FillBottom = Rgb(0x7434C9), FillEdge = Rgb(0xF3E6FF),
+            CoinTop = Rgb(0xE6CCFF), CoinBottom = Rgb(0x9B4DE8), CoinRim = Rgb(0x351066)
+        };
+
+        public static readonly Palette Green = new Palette
+        {
+            Name = "green", DisplayName = "Green",
+            Border = Rgb(0x5CC46B), PanelTop = Rgb(0x18241A), PanelBottom = Rgb(0x0B120C),
+            HeaderTop = Rgb(0x24572D), HeaderBottom = Rgb(0x123018), HeaderSheen = Rgba(60, 0xB8F5C0),
+            HeaderLine = Rgb(0x040A05), Title = Rgb(0x9EEBA8), NameText = Rgb(0xE8FBEA),
+            BadgeTop = Rgb(0x09100A), BadgeBottom = Rgb(0x09100A), BadgeBorder = Rgb(0x2F6B3A), BadgeText = Rgb(0xE0F5E3),
+            TrackTop = Rgb(0x050A06), TrackBottom = Rgb(0x050A06), TrackBorder = Rgb(0x2F6B3A),
+            Label = Rgb(0x93BC9A), Value = Rgb(0xFFFFFF), ValueShadow = Rgba(150, 0x000000), Negative = Rgb(0xFF8672),
+            Missing = Rgb(0x6E8A72), Divider = Rgb(0x23382A),
+            TileTop = Rgb(0xC2F5C8), TileMid = Rgb(0x4FCF62), TileBottom = Rgb(0x24963A), TileBorder = Rgb(0x0C4A18), TileDigitOutline = Rgb(0x0C4A18),
+            FillTop = Rgb(0xD4FFB0), FillMid = Rgb(0x6FE05C), FillBottom = Rgb(0x2EA33A), FillEdge = Rgb(0xE8FFE0),
+            CoinTop = Rgb(0xC8F7B8), CoinBottom = Rgb(0x3FB84F), CoinRim = Rgb(0x0C4A18)
+        };
+
+        public static readonly Palette Teal = new Palette
+        {
+            Name = "teal", DisplayName = "Teal",
+            Border = Rgb(0x3CC8BE), PanelTop = Rgb(0x142423), PanelBottom = Rgb(0x091211),
+            HeaderTop = Rgb(0x1A5752), HeaderBottom = Rgb(0x0D2E2B), HeaderSheen = Rgba(60, 0xAEF2EC),
+            HeaderLine = Rgb(0x030A09), Title = Rgb(0x8DEDE3), NameText = Rgb(0xE3FBF8),
+            BadgeTop = Rgb(0x071110), BadgeBottom = Rgb(0x071110), BadgeBorder = Rgb(0x26716A), BadgeText = Rgb(0xDDF5F2),
+            TrackTop = Rgb(0x040A09), TrackBottom = Rgb(0x040A09), TrackBorder = Rgb(0x26716A),
+            Label = Rgb(0x8EBDB8), Value = Rgb(0xFFFFFF), ValueShadow = Rgba(150, 0x000000), Negative = Rgb(0xFF8672),
+            Missing = Rgb(0x6A8A87), Divider = Rgb(0x1F3A37),
+            TileTop = Rgb(0xB8F5EF), TileMid = Rgb(0x33C7BA), TileBottom = Rgb(0x138A80), TileBorder = Rgb(0x06403B), TileDigitOutline = Rgb(0x06403B),
+            FillTop = Rgb(0xC8FFF8), FillMid = Rgb(0x3DDBCB), FillBottom = Rgb(0x12988B), FillEdge = Rgb(0xE4FFFB),
+            CoinTop = Rgb(0xC0F5EE), CoinBottom = Rgb(0x2BB3A6), CoinRim = Rgb(0x06403B)
+        };
+
+        public static readonly Palette Yellow = new Palette
+        {
+            Name = "yellow", DisplayName = "Yellow",
+            Border = Rgb(0xE8C53A), PanelTop = Rgb(0x26220F), PanelBottom = Rgb(0x121006),
+            HeaderTop = Rgb(0x6B5A12), HeaderBottom = Rgb(0x382F08), HeaderSheen = Rgba(60, 0xFFF0A0),
+            HeaderLine = Rgb(0x0A0802), Title = Rgb(0xFFE27A), NameText = Rgb(0xFFF8DC),
+            BadgeTop = Rgb(0x110F06), BadgeBottom = Rgb(0x110F06), BadgeBorder = Rgb(0x7A6820), BadgeText = Rgb(0xFAF1CF),
+            TrackTop = Rgb(0x0A0904), TrackBottom = Rgb(0x0A0904), TrackBorder = Rgb(0x7A6820),
+            Label = Rgb(0xC9B97F), Value = Rgb(0xFFFFFF), ValueShadow = Rgba(150, 0x000000), Negative = Rgb(0xFF8672),
+            Missing = Rgb(0x8E8566), Divider = Rgb(0x3F381C),
+            TileTop = Rgb(0xFFF2A8), TileMid = Rgb(0xF7D23A), TileBottom = Rgb(0xC9A010), TileBorder = Rgb(0x5E4A04), TileDigitOutline = Rgb(0x5E4A04),
+            FillTop = Rgb(0xFFF6B0), FillMid = Rgb(0xFFD93D), FillBottom = Rgb(0xD9A70F), FillEdge = Rgb(0xFFFBE0),
+            CoinTop = Rgb(0xFFF0A0), CoinBottom = Rgb(0xE6B820), CoinRim = Rgb(0x5E4A04)
+        };
+
+        public static readonly Palette Lavender = new Palette
+        {
+            Name = "lavender", DisplayName = "Lavender",
+            Border = Rgb(0xB9A3F0), PanelTop = Rgb(0x1E1C29), PanelBottom = Rgb(0x0F0E15),
+            HeaderTop = Rgb(0x3E3767), HeaderBottom = Rgb(0x211D38), HeaderSheen = Rgba(60, 0xE2DAFF),
+            HeaderLine = Rgb(0x05040A), Title = Rgb(0xD6CCFF), NameText = Rgb(0xF3F0FF),
+            BadgeTop = Rgb(0x0C0B12), BadgeBottom = Rgb(0x0C0B12), BadgeBorder = Rgb(0x4D4680), BadgeText = Rgb(0xECE8FA),
+            TrackTop = Rgb(0x07060B), TrackBottom = Rgb(0x07060B), TrackBorder = Rgb(0x4D4680),
+            Label = Rgb(0xA9A2C9), Value = Rgb(0xFFFFFF), ValueShadow = Rgba(150, 0x000000), Negative = Rgb(0xFF8672),
+            Missing = Rgb(0x77728E), Divider = Rgb(0x2E2B45),
+            TileTop = Rgb(0xEEE8FF), TileMid = Rgb(0xB8A6F5), TileBottom = Rgb(0x8A74D9), TileBorder = Rgb(0x3A2C7A), TileDigitOutline = Rgb(0x3A2C7A),
+            FillTop = Rgb(0xF0EBFF), FillMid = Rgb(0xC3B2FA), FillBottom = Rgb(0x8F78E0), FillEdge = Rgb(0xFAF8FF),
+            CoinTop = Rgb(0xEEE8FF), CoinBottom = Rgb(0xA08CEB), CoinRim = Rgb(0x3A2C7A)
+        };
+
+        /// <summary>Neutral dark panel; border, title, level tiles and EXP bar in rainbow colors.</summary>
+        public static readonly Palette RainbowTheme = new Palette
+        {
+            Name = "rainbow", DisplayName = "Rainbow", Rainbow = true,
+            Border = Rgb(0xFFFFFF), PanelTop = Rgb(0x1C1C25), PanelBottom = Rgb(0x0B0B10),
+            HeaderTop = Rgb(0x2E2E3C), HeaderBottom = Rgb(0x16161F), HeaderSheen = Rgba(50, 0xFFFFFF),
+            HeaderLine = Rgb(0x000000), Title = Rgb(0xFFFFFF), NameText = Rgb(0xFFFFFF),
+            BadgeTop = Rgb(0x0B0B10), BadgeBottom = Rgb(0x0B0B10), BadgeBorder = Rgb(0x4A4A5A), BadgeText = Rgb(0xFFFFFF),
+            TrackTop = Rgb(0x06060A), TrackBottom = Rgb(0x06060A), TrackBorder = Rgb(0x4A4A5A),
+            Label = Rgb(0xB0B0C0), Value = Rgb(0xFFFFFF), ValueShadow = Rgba(150, 0x000000), Negative = Rgb(0xFF8672),
+            Missing = Rgb(0x707080), Divider = Rgb(0x2C2C38),
+            TileTop = Rgb(0xFFFFFF), TileMid = Rgb(0xCCCCCC), TileBottom = Rgb(0x999999), TileBorder = Rgb(0x333333), TileDigitOutline = Rgb(0x222222),
+            FillTop = Rgb(0xFFFFFF), FillMid = Rgb(0xCCCCCC), FillBottom = Rgb(0x999999), FillEdge = Rgb(0xFFFFFF),
+            CoinTop = Rgb(0xFF7A7A), CoinBottom = Rgb(0x6B8BFF), CoinRim = Rgb(0x222244)
+        };
+
+        public static readonly Palette[] All =
+        {
+            Default, Pink, Red, Black, Orange, Blue, Purple, Green, Teal, Yellow, Lavender, RainbowTheme
+        };
 
         public static Palette ByName(string name)
         {
@@ -259,15 +359,34 @@ namespace MapleExpTracker
                 using (var p = new Pen(pal.HeaderLine, 1.5f)) g.DrawLine(p, 0, HeaderH, PanelW, HeaderH);
                 g.Restore(state);
 
-                using (var p = new Pen(pal.Border, 1.6f)) g.DrawPath(p, shape);
+                using (Brush border = AccentBrush(panel, pal.Border))
+                using (var p = new Pen(border, pal.Rainbow ? 1.8f : 1.6f))
+                    g.DrawPath(p, shape);
             }
+        }
+
+        /// <summary>A solid brush, or a left-to-right rainbow across <paramref name="r"/> for the Rainbow theme.</summary>
+        Brush AccentBrush(RectangleF r, Color color)
+        {
+            return pal.Rainbow ? (Brush)RainbowBrush(r) : new SolidBrush(color);
+        }
+
+        static LinearGradientBrush RainbowBrush(RectangleF r)
+        {
+            var b = new LinearGradientBrush(new RectangleF(r.X - 1, r.Y, Math.Max(2, r.Width + 2), Math.Max(1, r.Height)),
+                Palette.RainbowColors[0], Palette.RainbowColors[5], LinearGradientMode.Horizontal);
+            var blend = new ColorBlend(6);
+            blend.Colors = Palette.RainbowColors;
+            blend.Positions = new[] { 0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f };
+            b.InterpolationColors = blend;
+            return b;
         }
 
         void DrawHeader(Graphics g, OverlayView v)
         {
             float cy = HeaderH / 2;
             DrawCoin(g, 14f, cy, 5.5f);
-            using (var b = new SolidBrush(pal.Title)) DrawSpaced(g, "EXP TRACKER", HeaderFont, b, 25f, cy, 1.1f);
+            using (Brush b = AccentBrush(new RectangleF(25f, 0, 112f, HeaderH), pal.Title)) DrawSpaced(g, "EXP TRACKER", HeaderFont, b, 25f, cy, 1.1f);
 
             // Settings button in the top-right corner.
             var button = new RectangleF(PanelW - 29f, 3f, 22f, 20f);
@@ -331,29 +450,40 @@ namespace MapleExpTracker
                 g.DrawString("LV.", LvFont, b, badge.X + 7f, TextTop(LvFont, RowTop + RowH / 2), Typo);
 
             float x = badge.X + 7f + lvW + 5f, y = RowTop + (RowH - tileH) / 2;
-            foreach (char d in digits)
+            for (int i = 0; i < digits.Length; i++)
             {
-                DrawTile(g, new RectangleF(x, y, tileW, tileH), d.ToString());
+                DrawTile(g, new RectangleF(x, y, tileW, tileH), digits[i].ToString(), i);
                 x += tileW + gap;
             }
             LevelArea = new RectangleF(badge.X + Margin, badge.Y + Margin, badge.Width, badge.Height);
             return badge.Right;
         }
 
-        void DrawTile(Graphics g, RectangleF r, string digit)
+        void DrawTile(Graphics g, RectangleF r, string digit, int index)
         {
+            Color top = pal.TileTop, mid = pal.TileMid, bottom = pal.TileBottom, border = pal.TileBorder, outline = pal.TileDigitOutline;
+            if (pal.Rainbow)
+            {
+                // Each digit gets its own rainbow color.
+                Color c = Palette.RainbowColors[(index * 2) % Palette.RainbowColors.Length];
+                top = Lighten(c, 0.5f);
+                mid = c;
+                bottom = Darken(c, 0.25f);
+                border = Darken(c, 0.6f);
+                outline = Darken(c, 0.65f);
+            }
             using (GraphicsPath p = Shapes.RoundRect(r, 3f))
             {
-                using (LinearGradientBrush b = Shapes.Vertical(r, pal.TileTop, pal.TileMid, pal.TileBottom, 0.5f))
+                using (LinearGradientBrush b = Shapes.Vertical(r, top, mid, bottom, 0.5f))
                     g.FillPath(b, p);
-                using (var pen = new Pen(pal.TileBorder, 1f)) g.DrawPath(pen, p);
+                using (var pen = new Pen(border, 1f)) g.DrawPath(pen, p);
             }
             var gloss = new RectangleF(r.X + 1.5f, r.Y + 1.2f, r.Width - 3f, r.Height * 0.42f);
             using (GraphicsPath p = Shapes.RoundRect(gloss, 2f))
             using (var b = new SolidBrush(Color.FromArgb(55, 255, 255, 255)))
                 g.FillPath(b, p);
             DrawOutlined(g, digit, Heavy, HeavyStyle, 13.5f, r.X + r.Width / 2, r.Y + r.Height / 2 + 0.3f,
-                Color.FromArgb(0xFF, 0xFC, 0xED), pal.TileDigitOutline, 2.2f);
+                Color.FromArgb(0xFF, 0xFC, 0xED), outline, 2.2f);
         }
 
         void DrawBar(Graphics g, OverlayView v, float left)
@@ -372,8 +502,19 @@ namespace MapleExpTracker
                 var fill = new RectangleF(x0 + 2f, RowTop + 2f, fw, RowH - 4f);
                 using (GraphicsPath fp = Shapes.RoundRect(fill, 2.5f))
                 {
-                    using (LinearGradientBrush b = Shapes.Vertical(fill, pal.FillTop, pal.FillMid, pal.FillBottom, 0.4f))
-                        g.FillPath(b, fp);
+                    if (pal.Rainbow)
+                    {
+                        // The rainbow spans the whole bar, so more colors show as the level fills up.
+                        using (LinearGradientBrush b = RainbowBrush(new RectangleF(x0 + 2f, fill.Y, inner, fill.Height)))
+                            g.FillPath(b, fp);
+                        using (LinearGradientBrush b = Shapes.Vertical(fill, Color.FromArgb(0, 0, 0, 0), Color.FromArgb(80, 0, 0, 0)))
+                            g.FillPath(b, fp);
+                    }
+                    else
+                    {
+                        using (LinearGradientBrush b = Shapes.Vertical(fill, pal.FillTop, pal.FillMid, pal.FillBottom, 0.4f))
+                            g.FillPath(b, fp);
+                    }
                     GraphicsState state = g.Save();
                     g.SetClip(fp, CombineMode.Intersect);
                     var gloss = new RectangleF(fill.X, fill.Y, fill.Width, fill.Height * 0.45f);
@@ -485,12 +626,36 @@ namespace MapleExpTracker
             float w1 = Measure(g, by, CreditFont), w2 = Measure(g, name, CreditNameFont);
             float x = (PanelW - w1 - w2) / 2;
             using (var b = new SolidBrush(pal.Missing)) g.DrawString(by, CreditFont, b, x, TextTop(CreditFont, y), Typo);
-            using (var b = new SolidBrush(pal.Title)) g.DrawString(name, CreditNameFont, b, x + w1, TextTop(CreditNameFont, y), Typo);
+            using (Brush b = AccentBrush(new RectangleF(x + w1, y - 8f, w2, 16f), pal.Title))
+                g.DrawString(name, CreditNameFont, b, x + w1, TextTop(CreditNameFont, y), Typo);
         }
 
         static Color Lighten(Color c, float amount)
         {
             return Color.FromArgb(c.A, c.R + (int)((255 - c.R) * amount), c.G + (int)((255 - c.G) * amount), c.B + (int)((255 - c.B) * amount));
+        }
+
+        static Color Darken(Color c, float amount)
+        {
+            return Color.FromArgb(c.A, (int)(c.R * (1 - amount)), (int)(c.G * (1 - amount)), (int)(c.B * (1 - amount)));
+        }
+
+        /// <summary>A small color sample of a theme, for the Theme menu.</summary>
+        public static Bitmap Swatch(Palette p, int size)
+        {
+            var bmp = new Bitmap(size, size, PixelFormat.Format32bppArgb);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                var r = new RectangleF(1.5f, 1.5f, size - 3f, size - 3f);
+                using (GraphicsPath path = Shapes.RoundRect(r, size / 5f))
+                {
+                    using (Brush b = p.Rainbow ? (Brush)RainbowBrush(r) : Shapes.Vertical(r, p.FillTop, p.FillMid, p.FillBottom, 0.45f))
+                        g.FillPath(b, path);
+                    using (var pen = new Pen(p.Rainbow ? Color.FromArgb(0x33, 0x33, 0x33) : p.TileBorder, 1f)) g.DrawPath(pen, path);
+                }
+            }
+            return bmp;
         }
 
         void DrawCoin(Graphics g, float cx, float cy, float r)

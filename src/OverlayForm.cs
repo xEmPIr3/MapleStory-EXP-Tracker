@@ -475,7 +475,7 @@ namespace MapleExpTracker
             foreach (Palette p in Palette.All)
             {
                 Palette value = p;
-                var item = new ToolStripMenuItem(p.DisplayName, null, delegate
+                var item = new ToolStripMenuItem(p.DisplayName, OverlayRenderer.Swatch(p, 16), delegate
                 {
                     settings.Theme = value.Name;
                     renderer.Palette = value;

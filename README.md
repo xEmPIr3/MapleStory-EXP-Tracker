@@ -38,7 +38,8 @@ That's it. The dot in the header turns green while EXP is being read.
 - **Drag** the tracker to move it (it remembers its position).
 - **Gear button** (top right) opens the settings menu: select region, test OCR, set level/name, reset session,
   pause, size, opacity, theme, click-through, hide, exit. Right-clicking the tracker opens the same menu.
-- **Themes** (gear → Theme): Default (Gold), Pink, Red, Black, Orange and Blue. All are dark; the choice is remembered.
+- **Themes** (gear → Theme): Default (Gold), Pink, Red, Black, Orange, Blue, Purple, Green, Teal, Yellow,
+  Lavender and Rainbow. All are dark; the choice is remembered.
 - **Double-click** the level badge or the name to change them.
 - **Tray icon**: same menu; double-click to show/hide the tracker. Use it to turn *Click-Through* off again.
 
