@@ -7,7 +7,7 @@ See your EXP per hour, session EXP and time to level while you grind.
 
 *Created by Aydrian*
 
-<img src="images/hero.png" width="576" alt="The EXP Tracker overlay">
+<img src="images/v1.3.1/hero.png" width="576" alt="The EXP Tracker overlay">
 
 ### [⬇ Download the latest version](https://github.com/xEmPIr3/MapleStory-EXP-Tracker/releases/latest)
 
@@ -45,17 +45,17 @@ Windows 10 / 11 · one small .exe · no install
 
 | | |
 |:---:|:---:|
-| <img src="images/theme-default.png" width="400" alt="Default (Gold) theme"><br>**Default (Gold)** | <img src="images/theme-rainbow.png" width="400" alt="Rainbow theme"><br>**Rainbow** |
-| <img src="images/theme-pink.png" width="400" alt="Pink theme"><br>**Pink** | <img src="images/theme-red.png" width="400" alt="Red theme"><br>**Red** |
-| <img src="images/theme-orange.png" width="400" alt="Orange theme"><br>**Orange** | <img src="images/theme-yellow.png" width="400" alt="Yellow theme"><br>**Yellow** |
-| <img src="images/theme-green.png" width="400" alt="Green theme"><br>**Green** | <img src="images/theme-teal.png" width="400" alt="Teal theme"><br>**Teal** |
-| <img src="images/theme-blue.png" width="400" alt="Blue theme"><br>**Blue** | <img src="images/theme-purple.png" width="400" alt="Purple theme"><br>**Purple** |
-| <img src="images/theme-lavender.png" width="400" alt="Lavender theme"><br>**Lavender** | <img src="images/theme-black.png" width="400" alt="Black theme"><br>**Black** |
+| <img src="images/v1.3.1/theme-default.png" width="400" alt="Default (Gold) theme"><br>**Default (Gold)** | <img src="images/v1.3.1/theme-rainbow.png" width="400" alt="Rainbow theme"><br>**Rainbow** |
+| <img src="images/v1.3.1/theme-pink.png" width="400" alt="Pink theme"><br>**Pink** | <img src="images/v1.3.1/theme-red.png" width="400" alt="Red theme"><br>**Red** |
+| <img src="images/v1.3.1/theme-orange.png" width="400" alt="Orange theme"><br>**Orange** | <img src="images/v1.3.1/theme-yellow.png" width="400" alt="Yellow theme"><br>**Yellow** |
+| <img src="images/v1.3.1/theme-green.png" width="400" alt="Green theme"><br>**Green** | <img src="images/v1.3.1/theme-teal.png" width="400" alt="Teal theme"><br>**Teal** |
+| <img src="images/v1.3.1/theme-blue.png" width="400" alt="Blue theme"><br>**Blue** | <img src="images/v1.3.1/theme-purple.png" width="400" alt="Purple theme"><br>**Purple** |
+| <img src="images/v1.3.1/theme-lavender.png" width="400" alt="Lavender theme"><br>**Lavender** | <img src="images/v1.3.1/theme-black.png" width="400" alt="Black theme"><br>**Black** |
 
 ## How it works
 
 <div align="center">
-<img src="images/how-it-reads.png" width="560" alt="The game's EXP bar is read and turned into the tracker">
+<img src="images/v1.3.1/how-it-reads.png" width="560" alt="The game's EXP bar is read and turned into the tracker">
 </div>
 
 ```mermaid
@@ -83,7 +83,7 @@ The tracker **never touches the game's memory or files**. It only looks at the s
 Click the gear → **Test OCR…** to see exactly what the tracker captures, what it reads and what it makes of it.
 
 <div align="center">
-<img src="images/ocr-test.png" width="560" alt="The Test OCR window">
+<img src="images/v1.3.1/ocr-test.png" width="560" alt="The Test OCR window">
 </div>
 
 ## Getting started
@@ -99,7 +99,7 @@ That's it. The dot in the header turns green while your EXP is being read.
 
 ## Settings
 
-<img src="images/settings-menu.png" width="543" alt="The settings menu with the theme list open">
+<img src="images/v1.3.1/settings-menu.png" width="543" alt="The settings menu with the theme list open">
 
 Everything is in the menu behind the **gear** button (right-clicking the tracker opens it too):
 
