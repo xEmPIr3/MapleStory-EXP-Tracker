@@ -90,7 +90,9 @@ build.bat docs [dir]    builds, then draws the download-page images (tools/DocIm
 ### Publishing a new version
 
 1. Bump the version in `src/AssemblyInfo.cs` and run `build.bat test`.
-2. Run `build.bat docs public\images` if the look changed, then commit and push the `public` folder
+2. If the look changed, run `build.bat docs public\images\vX.Y.Z`, point the picture links in
+   `public\README.md` at the new folder and delete the old one. (A new folder name makes browsers load the new
+   pictures; GitHub lets them keep the old ones for a while otherwise.) Then commit and push the `public` folder
    (it's its own repository: the public download page).
 3. Attach the new exe to a release on the public repository:
    `gh release create vX.Y.Z MapleExpTracker.exe --repo xEmPIr3/MapleStory-EXP-Tracker`
